@@ -1,0 +1,22 @@
+//populates list on the main window
+public class ListItem {
+	int priorityNumber;
+	int dueMonth;
+	int dueDay;
+	String title;
+	
+	Status (another object?)
+	Status (string or enum)
+	Date month (int)
+	Date day (int)
+	
+	
+	FUNCTIONS
+	
+	setPriorityNumber(int newNum){
+		priorityNumber = newNum;
+	}
+	Set title (string)
+	Set due date (month, day)
+	Change status (month, day)
+}

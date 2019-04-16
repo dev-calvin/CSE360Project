@@ -1,0 +1,37 @@
+//populates list on the main window
+public class ListItem {
+	int priorityNumber;
+	int dueMonth;
+	int dueDay;
+	String title;
+	enum Status {
+		NOTSTARTED,
+		INPROGRESS,
+		DELETED,
+		COMPLETED
+	}
+	int statusDay;
+	int statusMonth;
+	Status currentStatus;
+	
+	FUNCTIONS
+	
+	ListItem
+	
+	public void setPriorityNumber(int newNum){
+		priorityNumber = newNum;
+	}
+	
+	public void setTitle(String newTitle){
+		title = newTitle;
+	}
+	
+	public void setDueDate(int newMonth, int newDay){
+		dueMonth = newMonth;
+		dueDay = newDay;
+	}
+	
+	public void changeStatus(Status currentStatus, int month, int day){
+		
+	}
+}
