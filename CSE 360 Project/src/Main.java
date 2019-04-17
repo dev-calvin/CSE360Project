@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -7,8 +10,8 @@ import javafx.geometry.Insets;
 
 @SuppressWarnings("restriction")
 public class Main extends Application{
-	Stage window;
-	Scene list, newNote, editNote, sortList, saveWarning;
+	static Stage window;
+	static Scene list, newNote, editNote, sortList, saveWarning;
 	//buttons for list
 	Button addNote, report, load, save, sort;
 	//buttons for newNote
@@ -28,7 +31,8 @@ public class Main extends Application{
 		BorderPane listLayout = new BorderPane();
 		HBox listTop = listTop();
 		listLayout.setTop(listTop);
-//		listLayout.setCenter(/*list goes here */);
+		FillList sampleList = new FillList();
+		listLayout.setCenter(sampleList.createListGUI());
 		list = new Scene(listLayout, 1200, 800);   
 		
 		//newNote scene
@@ -49,10 +53,10 @@ public class Main extends Application{
 	}
 	
 	public HBox listTop() {
-	    HBox hbox = new HBox();
-	    hbox.setPadding(new Insets(15, 12, 15, 12));
-	    hbox.setSpacing(10);
-	    hbox.setStyle("-fx-background-color: #FFFFFF;");
+	    HBox listTop = new HBox();
+	    listTop.setPadding(new Insets(15, 12, 15, 12));
+	    listTop.setSpacing(10);
+	    listTop.setStyle("-fx-background-color: #FFFFFF;");
 	    
 		//add note button
 		addNote = new Button();
@@ -70,9 +74,9 @@ public class Main extends Application{
 			//create report
 		});
 		
-		hbox.getChildren().addAll(addNote,report);
+		listTop.getChildren().addAll(addNote,report);
 
-	    return hbox;
+	    return listTop;
 	}
 
 }

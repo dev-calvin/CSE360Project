@@ -1,23 +1,34 @@
 public class ListItem {
 	enum Status {
-		NOTSTARTED,
-		INPROGRESS,
-		DELETED,
-		COMPLETED
+		NOTSTARTED("Not Started"),
+		INPROGRESS("In Progress"),
+		DELETED("Deleted"),
+		COMPLETED("Completed");
+		
+		String status;
+		
+		Status(String currentStatus){
+			status = currentStatus;
+		}
+		
+		public String toString (){
+			return status;
+		}
 	}
 	
 	int priorityNumber;
 	int dueMonth;
 	int dueDay;
 	String title;
-	int statusDay;
+	Status currentStatus = Status.NOTSTARTED;
 	int statusMonth;
-	Status currentStatus;
+	int statusDay;
 	
 	public ListItem (String itemTitle, int itemDueMonth, int itemDueDay, int itemPriorityNumber){
 		title = itemTitle;
 		dueMonth = itemDueMonth;
 		dueDay = itemDueDay;
+		priorityNumber = itemPriorityNumber;
 	}
 	
 	public void setPriorityNumber(int newNum){
@@ -33,9 +44,46 @@ public class ListItem {
 		dueDay = newDay;
 	}
 	
-	public void changeStatus(Status newStatus, int newMonth, int newDay){
-		currentStatus = newStatus;
+	public void changeStatus(String newStatus, int newMonth, int newDay){
+		switch (newStatus){
+		case "In Progress" :
+			currentStatus = Status.INPROGRESS;
+			break;
+		case "Deleted" :
+			currentStatus = Status.DELETED;
+			break;
+		case "Completed" :
+			currentStatus = Status.COMPLETED;
+		}
 		statusMonth = newMonth;
 		statusDay = newDay;
+	}
+	
+	public int getPriorityNumber (){
+		return priorityNumber;
+	}
+	
+	public int getDueMonth (){
+		return dueMonth;
+	}
+	
+	public int getDueDay (){
+		return dueDay;
+	}
+	
+	public String getTitle (){
+		return title;
+	}
+	
+	public String getStatus(){
+		return currentStatus.toString();
+	}
+	
+	public int getStatusMonth(){
+		return statusMonth;
+	}
+	
+	public int getStatusDay(){
+		return statusDay;
 	}
 }
