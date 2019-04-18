@@ -17,9 +17,12 @@ public class Main extends Application{
 	//buttons for newNote
 	Button cancel;
 
+	static ListItemArray arrayList;
+	
 	public static void main(String[] args) {
 		//entry point for program
 		launch(args);
+		
 	}
 
 	@Override
@@ -31,8 +34,9 @@ public class Main extends Application{
 		BorderPane listLayout = new BorderPane();
 		HBox listTop = listTop();
 		listLayout.setTop(listTop);
-		FillList sampleList = new FillList();
-		listLayout.setCenter(sampleList.createListGUI());
+		arrayList = new ListItemArray();
+		FillList usersList = new FillList(arrayList);
+		listLayout.setCenter(usersList.createListGUI());
 		list = new Scene(listLayout, 1200, 800);   
 		
 		//newNote scene
