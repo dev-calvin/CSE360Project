@@ -1,0 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListItemArray {
+		//arraylist of list objects
+		List<ListItem> listItemArray = new ArrayList<>();
+		
+		public void newListItem(String title, int dueMonth, int dueDay, int priorityNumber){
+			listItemArray.add(new ListItem("title", 6, 12, 1));
+			listItemArray.add(new ListItem("another note", 1, 1, 2));
+			listItemArray.add(new ListItem("number 3", 12, 21, 3));
+		}
+
+}

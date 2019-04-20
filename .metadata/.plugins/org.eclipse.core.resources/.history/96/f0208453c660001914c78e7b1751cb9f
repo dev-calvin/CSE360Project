@@ -1,0 +1,80 @@
+public class ListItem {
+	enum Status {
+		NOTSTARTED("Not Started"),
+		INPROGRESS("In Progress"),
+		DELETED("Deleted"),
+		COMPLETED("Completed");
+		
+		String status;
+		
+		Status(String currentStatus){
+			status = currentStatus;
+		}
+		
+		public String toString (){
+			return status;
+		}
+	}
+	
+	int priorityNumber;
+	int dueMonth;
+	int dueDay;
+	String title;
+	Status currentStatus;
+	int statusMonth;
+	int statusDay;
+	
+	public ListItem (String itemTitle, int itemDueMonth, int itemDueDay, int itemPriorityNumber){
+		title = itemTitle;
+		dueMonth = itemDueMonth;
+		dueDay = itemDueDay;
+	}
+	
+	public void setPriorityNumber(int newNum){
+		priorityNumber = newNum;
+	}
+	
+	public void setTitle(String newTitle){
+		title = newTitle;
+	}
+	
+	public void setDueDate(int newMonth, int newDay){
+		dueMonth = newMonth;
+		dueDay = newDay;
+	}
+	
+	public void changeStatus(Status newStatus, int newMonth, int newDay){
+		currentStatus = newStatus;
+		statusMonth = newMonth;
+		statusDay = newDay;
+	}
+	
+	public int getPriorityNumber (){
+		return priorityNumber;
+	}
+	
+	public int getDueMonth (){
+		return dueMonth;
+	}
+	
+	public int getDueDay (){
+		return dueDay;
+	}
+	
+	public String getTitle (){
+		return title;
+	}
+	
+	public String getStatus(){
+		System.out.println(String.valueOf(currentStatus.name()));
+		return " ";
+	}
+	
+	public int getStatusMonth(){
+		return statusMonth;
+	}
+	
+	public int getStatusDay(){
+		return statusDay;
+	}
+}
