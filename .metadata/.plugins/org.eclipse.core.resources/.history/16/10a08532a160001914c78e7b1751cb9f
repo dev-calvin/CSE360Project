@@ -1,0 +1,63 @@
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+@SuppressWarnings("restriction")
+public class Main extends Application{
+	Stage window;
+	Scene list, newNote, editNote, sortList, saveWarning;
+	//buttons for list
+	Button addNote, report, load, save, sort;
+	//buttons for newNote
+	Button cancel;
+
+	public static void main(String[] args) {
+		//entry point for program
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		//initializes stage
+		window = primaryStage;
+		window.setScene(list);
+		window.setTitle("CSE 360 List");
+		
+		//add note button
+		addNote = new Button();
+		addNote.setText("New Note");
+		addNote.setOnAction(e -> {
+			window.setScene(newNote);
+		});
+		
+		//cancel button
+		cancel = new Button();
+		cancel.setText("Cancel");
+		cancel.setOnAction(e -> {
+			window.setScene(list);
+		});
+		
+		//list layout
+		VBox listLayout = new VBox(20);
+		listLayout.getChildren().addAll(addNote, report, load, save, sort);
+		list = new Scene(listLayout, 400, 400);   
+		
+		//newNote layout
+		StackPane newNoteLayout = new StackPane();
+		newNoteLayout.getChildren().addAll(cancel);
+		newNote = new Scene(newNoteLayout, 400, 400);
+		
+		
+//		StackPane layout = new StackPane();
+//		layout.getChildren().add(button);
+//		
+//		Scene scene = new Scene(layout, 300, 250);
+//		primaryStage.setScene(scene);
+//		primaryStage.show();
+	}
+
+}
