@@ -1,0 +1,41 @@
+package cse360project;
+
+import java.util.Scanner;
+
+public class entryEdit_1 {
+
+	public static void main(String[] args) {
+		
+		//Variables
+		int priorityNumber;
+		String result;
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.print("Title ");
+		String description = scan.nextLine();
+		
+		System.out.print("Due Date ");
+		String dueDate = scan.nextLine();
+		
+		System.out.print("Date Started ");
+		String dateStarted = scan.nextLine();
+		
+		System.out.print("Priority #");
+		priorityNumber = scan.nextInt();
+		System.out.print("\n");
+		
+		System.out.println();
+		
+		
+		result = "Title " + description +  "\n" + "Due Date " + dueDate + "\n"
+				+ "Priority # " + priorityNumber + "\n" + "Date Started " + dateStarted;
+		
+		System.out.println(result);
+		
+		scan.close();
+		
+
+	}
+
+}
