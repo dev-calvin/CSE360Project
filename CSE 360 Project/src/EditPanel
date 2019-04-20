@@ -1,0 +1,84 @@
+package cse360project;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicButtonListener;
+
+
+public class EditPanel extends JPanel {
+
+	private String title;
+	private String dueDate;
+	private int priorityNum;
+
+	
+	//private JButton deleteButton;
+	//private JButton completeButton;
+	private JLabel editLabel;
+	private JLabel titleLabel;
+	private JTextField titleTextField;
+	
+	private JLabel dueDateLabel;
+	private JTextField dueDateTextField;
+	
+	private JLabel priorityNumLabel;
+	private JTextField priorityNumTextField;
+	
+	//private JButton saveButton;
+	
+	public EditPanel()
+	{
+		//Work in Progress
+		//deleteButton = new JButton("Delete");
+		//completeButton = new JButton("Complete");
+		editLabel = new JLabel("EDIT");
+		titleLabel = new JLabel("Title",JLabel.RIGHT);
+		titleTextField = new JTextField(10);
+		dueDateLabel = new JLabel("Due Date",JLabel.RIGHT);
+		dueDateTextField = new JTextField(10);
+		priorityNumLabel = new JLabel("Priority #",JLabel.RIGHT);
+		priorityNumTextField = new JTextField(10);
+		
+		//saveButton = new JButton("Save");
+		
+		//Buttons are work in progress
+	//	 deleteButton.addActionListener(new ActionListener());
+//		 completeButton.addActionListener(new ActionListener());
+	//	 saveButton.addActionListener(new ButtonListener());
+		 
+	//	 add(deleteButton);
+	//	 add(completeButton);
+		 
+		 add(editLabel);
+		 add(titleLabel);
+		 add(titleTextField);
+		 
+		 add(dueDateLabel);
+		 add(dueDateTextField);
+		 
+		 add(priorityNumLabel);
+		 add(priorityNumTextField);
+		 
+		 setBackground(Color.cyan);
+	     //setPreferredSize(new Dimension(300, 200));
+	     setPreferredSize(new Dimension(160, 220));
+			
+	//     private class ButtonListener implements ActionListener
+	 //    {
+
+	    //	 public void actionPerformed (ActionEvent event)
+	   // 	   {
+			
+			
+		
+	//}
+//}
+	}
+}
