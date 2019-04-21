@@ -1,11 +1,11 @@
-import java.util.ArrayList;
 import java.util.List;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
+import javafx.scene.text.Font;
 import javafx.geometry.Insets;
 
 @SuppressWarnings("restriction")
@@ -18,7 +18,18 @@ public class FillList{
 		listItemArray = arrayList.listItemArray;
 	}
 	
-	public VBox createListGUI (){
+	public void createListGUI(){
+		BorderPane listLayout = new BorderPane();
+		HBox listTop = listTop();
+		VBox listCenter = center();
+		
+		Main.list = new Scene(listLayout, 1200, 800);  
+		
+		listLayout.setTop(listTop);
+		listLayout.setCenter(listCenter);
+	}
+	
+	public VBox center (){
 		//center list
 		VBox centerListLayout = listContainer();
 		
@@ -30,7 +41,7 @@ public class FillList{
 	    VBox listContainer = new VBox();
 	    listContainer.setPadding(new Insets(10));
 	    listContainer.setSpacing(8);
-	    
+	    listContainer.getChildren().add(listDescriptors());
 	    for(int i = 0; i < listItemArray.size(); i++){
 		    listContainer.getChildren().add(listItem(i));
 	    }
@@ -43,11 +54,11 @@ public class FillList{
 
 	    HBox listItem = new HBox();
 	    listItem.setPadding(new Insets(15, 12, 15, 12));
-	    listItem.setSpacing(10);
+	    listItem.setSpacing(200);
 	    listItem.setStyle("-fx-background-color: #FFFFFF;");
 	    
 		priorityNumberLabel = new Label();
-		priorityNumberLabel.setText(String.valueOf(listItemArray.get(arrayPosition).getPriorityNumber()));
+		priorityNumberLabel.setText("# " + String.valueOf(listItemArray.get(arrayPosition).getPriorityNumber()));
 		priorityNumberLabel.setPrefSize(100, 20);
 		
 		dueDateLabel = new Label();
@@ -63,7 +74,7 @@ public class FillList{
 		titleLabel.setPrefSize(100, 20);
 		
 		statusLabel = new Label();
-		if (listItemArray.get(arrayPosition).getStatus().equals("NOTSTARTED")){
+		if (listItemArray.get(arrayPosition).getStatus().equals("Not Started")){
 			statusLabel.setText(listItemArray.get(arrayPosition).getStatus());
 		} else {
 			statusLabel.setText(
@@ -82,5 +93,101 @@ public class FillList{
 			Main.window.setScene(Main.editNote);
 		});
 	    return listItem;
+	}
+	
+	public HBox listDescriptors (){
+		Label priorityNumberLabel, dueDateLabel, titleLabel, statusLabel;
+		
+		HBox listItemDescriptor = new HBox();
+		listItemDescriptor.setPadding(new Insets(15, 12, 15, 12));
+		listItemDescriptor.setSpacing(300);
+		listItemDescriptor.setStyle("-fx-background-color: #D7D7D7;");
+		
+		priorityNumberLabel = new Label("Priority #");
+		dueDateLabel = new Label("Due Date");
+		titleLabel = new Label("Title");
+		statusLabel = new Label("Status");
+
+		
+		listItemDescriptor.getChildren().addAll(priorityNumberLabel,dueDateLabel, titleLabel, statusLabel);
+		
+		return listItemDescriptor;
+
+	}
+	
+	//buttons for list
+	Button addNote, report, load, save, sort;
+	//regions for spacing header
+	Region regionLeft, regionRight;
+	//header text
+	Label header;
+	
+	public HBox listTop() {
+	    HBox listTop = new HBox();
+	    listTop.setPadding(new Insets(15, 12, 15, 12));
+	    listTop.setSpacing(10);
+	    listTop.setStyle("-fx-background-color: #FFFFFF;");
+	    
+		//add note button
+		addNote = new Button();
+		addNote.setText("New Note");
+	    addNote.setPrefSize(100, 20);
+		addNote.setOnAction(e -> {
+			Main.window.setScene(Main.newNote);
+		});
+		
+		//add note button
+		report = new Button();
+		report.setText("Report");
+	    report.setPrefSize(100, 20);
+		report.setOnAction(e -> {
+			//create report
+		});
+		
+		regionLeft = new Region();
+	    HBox.setHgrow(regionLeft, Priority.ALWAYS);
+	    
+	    header = new Label("To Do List");
+	    header.setFont(new Font("Arial", 30));
+	    
+	    regionRight = new Region();
+	    HBox.setHgrow(regionRight, Priority.ALWAYS);
+		
+		//add note button
+		load = new Button();
+		load.setText("load");
+		load.setPrefSize(100, 20);
+		load.setOnAction(e -> {
+			//load list from file
+		});
+		
+		//add note button
+		save = new Button();
+		save.setText("save");
+		save.setPrefSize(100, 20);
+		save.setOnAction(e -> {
+			//load list from file
+		});
+		
+//		Image image = new Image(getClass().getResourceAsStream("saveIcon.png"));
+////		image.setPreserveRatio(true); 
+////		image.fitWidthProperty().bind(stage.widthProperty()); 
+////		image.fitHeightProperty().bind(stage.heightProperty());        
+//		save = new Button();
+//        save.setGraphic(new ImageView(image));
+//		save.setPrefSize(100, 20);
+//		save.setMaxSize(10,10);
+		
+		//add note button
+		sort = new Button();
+		sort.setText("sort");
+		sort.setPrefSize(100, 20);
+		sort.setOnAction(e -> {
+			//load list from file
+		});
+		
+		listTop.getChildren().addAll(addNote,report, regionLeft, header, regionRight, load, save, sort);
+
+	    return listTop;
 	}
 }

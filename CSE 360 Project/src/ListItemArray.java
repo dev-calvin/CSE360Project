@@ -7,7 +7,8 @@ public class ListItemArray {
 		
 		public ListItemArray (){
 			//initialize with fake data
-			listItemArray.add(new ListItem("note", 1, 1, 1));
+			listItemArray.add(new ListItem("note", 2, 11, 1));
+			listItemArray.get(0).changeStatus("In Progress", 1, 25);
 			listItemArray.add(new ListItem("number 2", 7, 28, 2));
 			listItemArray.add(new ListItem("number 3", 12, 31, 3));
 			listItemArray.add(new ListItem("number 4", 2, 5, 4));
