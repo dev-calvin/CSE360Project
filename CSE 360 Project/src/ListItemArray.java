@@ -21,15 +21,27 @@ public class ListItemArray {
 		}
 		
 		// delete list item
-
+		public void deleteListItem(String title){
+			
+		}
 		// complete list item
-		
+		public void completeListItem(String title){
+			
+		}
 		// sort by priority number
-		
+		public void sortPriorityNumber(ArrayList<ListItem> listItemArray) {
+			
+		}
 		// sort by due date
-		
+		public void sortDueDate() {
+			
+		}
 		// sort by title
-		
+		public void sortTitle() {
+	
+		}
 		// sort by status
-
+		public void sortStatus() {
+			
+		}
 }
