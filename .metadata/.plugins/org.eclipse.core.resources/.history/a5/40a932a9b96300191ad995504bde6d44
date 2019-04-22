@@ -1,0 +1,131 @@
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.text.html.ImageView;
+
+import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import javafx.geometry.Insets;
+
+@SuppressWarnings("restriction")
+public class Main extends Application{
+	static Stage window;
+	static Scene list, newNote, editNote, sortList, saveWarning;
+	//buttons for list
+	Button addNote, report, load, save, sort;
+	//regions for spacing header
+	Region regionLeft, regionRight;
+	//header text
+	Label header;
+	//buttons for newNote
+	Button cancel;
+
+	static ListItemArray arrayList;
+	
+	public static void main(String[] args) {
+		//entry point for program
+		launch(args);
+		
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		//initializes stage
+		window = primaryStage;
+		
+		//list scene
+		BorderPane listLayout = new BorderPane();
+		HBox listTop = listTop();
+		listLayout.setTop(listTop);
+		arrayList = new ListItemArray();
+		FillList usersList = new FillList(arrayList);
+		listLayout.setCenter(usersList.createListGUI());
+		list = new Scene(listLayout, 1200, 800);   
+		
+		//newNote scene
+		//cancel button
+				cancel = new Button();
+				cancel.setText("Cancel");
+				cancel.setOnAction(e -> {
+					window.setScene(list);
+				});
+		StackPane newNoteLayout = new StackPane();
+		newNoteLayout.getChildren().addAll(cancel);
+		newNote = new Scene(newNoteLayout, 400, 400);
+		
+		//sets up entry point scene
+		window.setScene(list);
+		window.setTitle("CSE 360 List");
+		window.show();
+	}
+	
+	public HBox listTop() {
+	    HBox listTop = new HBox();
+	    listTop.setPadding(new Insets(15, 12, 15, 12));
+	    listTop.setSpacing(10);
+	    listTop.setStyle("-fx-background-color: #FFFFFF;");
+	    
+		//add note button
+		addNote = new Button();
+		addNote.setText("New Note");
+	    addNote.setPrefSize(100, 20);
+		addNote.setOnAction(e -> {
+			window.setScene(newNote);
+		});
+		
+		//add note button
+		report = new Button();
+		report.setText("Report");
+	    report.setPrefSize(100, 20);
+		report.setOnAction(e -> {
+			//create report
+		});
+		
+		regionLeft = new Region();
+	    HBox.setHgrow(buttonsMiddle, Priority.ALWAYS);
+	    
+	    header = new Label();
+	    header.setText("To Do List");
+	    
+	    regionRight = new Region();
+	    HBox.setHgrow(buttonsMiddle, Priority.ALWAYS);
+		
+		//add note button
+		load = new Button();
+		load.setText("load");
+		load.setPrefSize(100, 20);
+		load.setOnAction(e -> {
+			//load list from file
+		});
+		
+		//add note button
+		save = new Button();
+		save.setText("save");
+		save.setPrefSize(100, 20);
+		save.setOnAction(e -> {
+			//load list from file
+		});
+		
+		//add note button
+		sort = new Button();
+		sort.setText("sort");
+		sort.setPrefSize(100, 20);
+		sort.setOnAction(e -> {
+			//load list from file
+		});
+		
+		listTop.getChildren().addAll(addNote,report, buttonsMiddle, load, save, sort);
+
+	    return listTop;
+	}
+
+}
