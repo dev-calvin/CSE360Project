@@ -30,7 +30,7 @@ public class EditNote {
 
 	public VBox createEditForm() {
 		CheckBox inProgressCB;
-		Region top, bottom;
+		Region bottom;
 		Label title, dueDay, dueMonth, priority, inProgress, statusMonth, statusDay;
 		TextField titleField, priorityField;
 		ComboBox<String> dueDaySelector, dueMonthSelector, statusDaySelector, statusMonthSelector;
@@ -38,20 +38,29 @@ public class EditNote {
 		
 		VBox form = new VBox();
 		form.setPadding(new Insets(10));
-		form.setSpacing(8);
+		form.setSpacing(50);
 		form.setAlignment(Pos.BOTTOM_CENTER);
 		
 		HBox due = new HBox();
 		due.setPadding(new Insets(15, 12, 15, 12));
-		due.setSpacing(300);
+		due.setSpacing(50);
+		due.setAlignment(Pos.CENTER);
 		
-		top = new Region();
-		VBox.setVgrow(top, Priority.ALWAYS);
-		
-		title = new Label("title");
+		HBox titleBox = new HBox();
+		titleBox.setPadding(new Insets(15, 12, 15, 12));
+		titleBox.setSpacing(50);
+		titleBox.setAlignment(Pos.CENTER);
+		title = new Label("Title");
 		titleField = new TextField();
+		titleField.setMaxWidth(300);
+		titleBox.getChildren().addAll(title, titleField);
 		
 		dueMonth = new Label("Due Month");
+		
+		HBox statusBox = new HBox();
+		statusBox.setPadding(new Insets(15, 12, 15, 12));
+		statusBox.setSpacing(50);
+		statusBox.setAlignment(Pos.CENTER);
 				
 		dueDaySelector = new ComboBox<String>();
 		dueDaySelector.getItems().addAll("1","2","3","4","5", "6", "7", "8", "9", "10", "11", "12", "13",
@@ -63,16 +72,21 @@ public class EditNote {
 		dueMonthSelector = new ComboBox<String>();
 		dueMonthSelector.getItems().addAll("1","2","3","4","5", "6", "7", "8", "9", "10", "11", "12");
 		
+		HBox priorityBox = new HBox();
+		priorityBox.setPadding(new Insets(15, 12, 15, 12));
+		priorityBox.setSpacing(50);
+		priorityBox.setAlignment(Pos.CENTER);
 		priority = new Label("Priority Number");
-		
 		priorityField = new TextField();
+		priorityField.setMaxWidth(50);
+		priorityBox.getChildren().addAll(priority, priorityField);
 				
 		inProgressCB = new CheckBox();
 		inProgressCB.setIndeterminate(false);
 		
 		inProgress = new Label("In Progress");
 		
-		statusMonth = new Label("started Month");
+		statusMonth = new Label("Started Month");
 		
 		statusMonthSelector = new ComboBox<String>();
 		statusMonthSelector.getItems().addAll("1","2","3","4","5", "6", "7", "8", "9", "10", "11", "12");
@@ -93,16 +107,18 @@ public class EditNote {
 			validateForm(titleField, dueMonthSelector, dueDaySelector, priorityField, inProgressCB, statusMonthSelector, statusDaySelector);			
 		});
 		
+		statusBox.getChildren().addAll(inProgress, inProgressCB, statusMonth, statusMonthSelector, statusDay, statusDaySelector);
 		due.getChildren().addAll(dueMonth, dueMonthSelector, dueDay, dueDaySelector);
-		form.getChildren().addAll(top, title, titleField, due, priority, priorityField, inProgressCB, inProgress, statusMonth, statusMonthSelector, statusDay, statusDaySelector, bottom, save);
+		form.getChildren().addAll(titleBox, due, priorityBox, statusBox, bottom, save);
 		return form;
 	}
 
 	private void validateForm(TextField titleField, ComboBox<String> dueMonthSelector, ComboBox<String> dueDaySelector,
 			TextField priorityField, CheckBox inProgressCB, ComboBox<String> statusMonthSelector,
 			ComboBox<String> statusDaySelector) {
-		// TODO Auto-generated method stub
+		//validates data and submits edits
 		
+		Main.window.setScene(Main.list);		
 	}
 
 	public HBox createEditHeader() {
@@ -127,6 +143,7 @@ public class EditNote {
 		HBox actions = new HBox();
 		actions.setPadding(new Insets(15, 12, 15, 12));
 		actions.setSpacing(300);
+		actions.setAlignment(Pos.CENTER);
 		
 		delete = new Button("Delete");
 		complete = new Button("Complete");

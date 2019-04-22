@@ -31,23 +31,13 @@ public class Main extends Application{
 		FillList listScene = new FillList(arrayList);
 		listScene.createListGUI();
 		
-//		//editNote scene
-//		EditNote editNoteScene = new EditNote(arrayList);
-//		editNoteScene.createEditNoteGUI();
+		//editNote scene
+		EditNote editNoteScene = new EditNote(arrayList);
+		editNoteScene.createEditNoteGUI();
 		
 		//newNote scene
 		NewNote newNoteScene = new NewNote(arrayList);
 		newNoteScene.createNewNoteGUI();
-		
-//		//cancel button
-//				cancel = new Button();
-//				cancel.setText("Cancel");
-//				cancel.setOnAction(e -> {
-//					window.setScene(list);
-//				});
-//		StackPane newNoteLayout = new StackPane();
-//		newNoteLayout.getChildren().addAll(cancel);
-//		newNote = new Scene(newNoteLayout, 400, 400);
 		
 		//sets up entry point scene
 		window.setScene(list);
