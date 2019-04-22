@@ -3,7 +3,6 @@ import java.util.List;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.geometry.Insets;
 
 @SuppressWarnings("restriction")
@@ -34,7 +33,6 @@ public class EditNote {
 	}
 
 	public HBox createEditHeader() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
