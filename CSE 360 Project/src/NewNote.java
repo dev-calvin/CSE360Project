@@ -104,11 +104,10 @@ public class NewNote {
 	}
 
 	private void validateRecord(TextField titleField, ComboBox<String> dueMonthSelector, ComboBox<String> dueDaySelector, TextField priorityField) {
-//		if ((titleField.getText() != null && !titleField.getText().isEmpty())) {
-//            title = titleField;
-//        } else {
-//            //
-//        }
-//		
+//       if ((titleField.getText() != null && !titleField.getText().isEmpty())) {
+//           title = titleField;
+//       } else {
+////            Main.listItemArray.add(new ListItem(title, dueMonth, dueDay, priorityNumber));
+//       }
 	}
 }
