@@ -1,0 +1,3 @@
+.btn_save {
+	-fx-background-image: url("saveIcon.png")
+}

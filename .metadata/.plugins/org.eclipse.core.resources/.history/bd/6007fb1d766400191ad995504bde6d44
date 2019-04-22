@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListItemArray {
+		//arraylist of list objects
+		List<ListItem> listItemArray = new ArrayList<>();
+		
+		public ListItemArray (){
+			//initialize with fake data
+			listItemArray.add(new ListItem("note", 1, 1, 1));
+			listItemArray.get(0).changeStatus("In Progress", 1, 25);
+			listItemArray.add(new ListItem("number 2", 7, 28, 2));
+			listItemArray.add(new ListItem("number 3", 12, 31, 3));
+			listItemArray.add(new ListItem("number 4", 2, 5, 4));
+
+		}
+		
+		// adds item to list
+		public void newListItem(String title, int dueMonth, int dueDay, int priorityNumber){
+			listItemArray.add(new ListItem(title, dueMonth, dueDay, priorityNumber));
+		}
+		
+		// delete list item
+
+		// complete list item
+		
+		// sort by priority number
+		
+		// sort by due date
+		
+		// sort by title
+		
+		// sort by status
+
+}
