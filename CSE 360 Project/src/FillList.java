@@ -2,8 +2,6 @@ import java.util.List;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.geometry.Insets;
@@ -168,15 +166,6 @@ public class FillList{
 		save.setOnAction(e -> {
 			//load list from file
 		});
-		
-//		Image image = new Image(getClass().getResourceAsStream("saveIcon.png"));
-////		image.setPreserveRatio(true); 
-////		image.fitWidthProperty().bind(stage.widthProperty()); 
-////		image.fitHeightProperty().bind(stage.heightProperty());        
-//		save = new Button();
-//        save.setGraphic(new ImageView(image));
-//		save.setPrefSize(100, 20);
-//		save.setMaxSize(10,10);
 		
 		//add note button
 		sort = new Button();
