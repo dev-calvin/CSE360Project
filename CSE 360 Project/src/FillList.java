@@ -158,7 +158,11 @@ public class FillList{
 		load.setText("load");
 		load.setPrefSize(100, 20);
 		load.setOnAction(e -> {
-			//load list from file
+			SaveList load = new SaveList();
+			Main.arrayList = load.loadSave();
+			FillList listScene = new FillList(Main.arrayList);
+			listScene.createListGUI();
+			Main.window.setScene(Main.list);
 		});
 		
 		//add note button
@@ -166,7 +170,8 @@ public class FillList{
 		save.setText("save");
 		save.setPrefSize(100, 20);
 		save.setOnAction(e -> {
-			//load list from file
+			SaveList save = new SaveList();
+			save.createSave();
 		});
 		
 		//add note button
@@ -174,7 +179,7 @@ public class FillList{
 		sort.setText("sort");
 		sort.setPrefSize(100, 20);
 		sort.setOnAction(e -> {
-			//load list from file
+//			
 		});
 		
 		listTop.getChildren().addAll(addNote,report, regionLeft, header, regionRight, load, save, sort);

@@ -109,5 +109,7 @@ public class NewNote {
 //       } else {
 ////            Main.listItemArray.add(new ListItem(title, dueMonth, dueDay, priorityNumber));
 //       }
+		
+		Main.window.setScene(Main.list);
 	}
 }

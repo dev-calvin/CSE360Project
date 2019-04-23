@@ -1,4 +1,6 @@
-public class ListItem {
+import java.io.Serializable;
+
+public class ListItem implements Serializable{
 	enum Status {
 		NOTSTARTED("Not Started"),
 		INPROGRESS("In Progress"),
