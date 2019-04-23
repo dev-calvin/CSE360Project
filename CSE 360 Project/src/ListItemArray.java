@@ -15,7 +15,6 @@ public class ListItemArray {
 			listItemArray.add(new ListItem("Take out trash", 2, 11, 1));
 			listItemArray.get(0).changeStatus("In Progress", 1, 25);
 			listItemArray.add(new ListItem("Eat an apple", 7, 28, 2));
-			listItemArray.get(1).changeStatus("Completed", 5, 12);
 			listItemArray.add(new ListItem("Go for a run", 12, 31, 3));
 			listItemArray.add(new ListItem("zipline set up", 2, 5, 4));
 			sortStatus(listItemArray,1);
@@ -24,6 +23,8 @@ public class ListItemArray {
 			newListItem("tester", 1,1,5);
 			newListItem("tester2", 1,1,6);
 			newListItem("tester3", 1,1,7);
+			
+			changeStatus("Completed", 1, 7, 2);
 		}
 		
 		// adds item to list

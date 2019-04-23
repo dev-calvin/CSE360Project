@@ -139,7 +139,9 @@ public class FillList{
 		report.setText("Report");
 	    report.setPrefSize(100, 20);
 		report.setOnAction(e -> {
-			//create report
+			ListReport report = new ListReport(Main.arrayList);
+			report.createReport();
+			
 		});
 		
 		regionLeft = new Region();
