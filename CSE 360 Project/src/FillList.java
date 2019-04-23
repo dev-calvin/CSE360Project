@@ -174,13 +174,11 @@ public class FillList{
 			save.createSave();
 		});
 		
-		//add note button
+		//sort button
 		sort = new Button();
 		sort.setText("sort");
 		sort.setPrefSize(100, 20);
-		sort.setOnAction(e -> {
-//			
-		});
+		sort.setOnAction(e -> new SortList());
 		
 		listTop.getChildren().addAll(addNote,report, regionLeft, header, regionRight, load, save, sort);
 
