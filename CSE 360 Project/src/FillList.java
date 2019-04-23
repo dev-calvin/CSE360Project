@@ -134,7 +134,7 @@ public class FillList{
 			Main.window.setScene(Main.newNote);
 		});
 		
-		//add note button
+		//report button
 		report = new Button();
 		report.setText("Report");
 	    report.setPrefSize(100, 20);
@@ -153,7 +153,7 @@ public class FillList{
 	    regionRight = new Region();
 	    HBox.setHgrow(regionRight, Priority.ALWAYS);
 		
-		//add note button
+		//load button
 		load = new Button();
 		load.setText("load");
 		load.setPrefSize(100, 20);
@@ -165,7 +165,7 @@ public class FillList{
 			Main.window.setScene(Main.list);
 		});
 		
-		//add note button
+		//save button
 		save = new Button();
 		save.setText("save");
 		save.setPrefSize(100, 20);
