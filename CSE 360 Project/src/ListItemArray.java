@@ -11,7 +11,7 @@ public class ListItemArray implements Serializable{
 		/* list number 2 */
 		List<ListItem> completedDeleted = new ArrayList<>();
 		
-		public ListItemArray (){
+//		public ListItemArray (){
 //			//initialize with fake data
 //			listItemArray.add(new ListItem("Take out trash", 2, 11, 1));
 //			listItemArray.get(0).changeStatus("In Progress", 1, 25);
@@ -26,7 +26,7 @@ public class ListItemArray implements Serializable{
 //			newListItem("tester3", 1,1,7);
 //			
 //			changeStatus("Completed", 1, 7, 2);
-		}
+//		}
 		
 		// adds item to list
 		public void newListItem(String title, int dueMonth, int dueDay, int priorityNumber){
