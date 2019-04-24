@@ -58,6 +58,7 @@ public class FillList{
 		priorityNumberLabel = new Label();
 		priorityNumberLabel.setText("# " + String.valueOf(listItemArray.get(arrayPosition).getPriorityNumber()));
 		priorityNumberLabel.setPrefSize(100, 20);
+		priorityNumberLabel.setId("priorityNumberLabel");
 		
 		dueDateLabel = new Label();
 		dueDateLabel.setText(
@@ -88,6 +89,14 @@ public class FillList{
 		listItem.getChildren().addAll(priorityNumberLabel,dueDateLabel, titleLabel, statusLabel);
 
 		listItem.setOnMouseClicked(e -> {
+			int priorityNumber;
+			int priorityNumberLabelIndex = listItem.lookup("#priorityNumberLabel").toString().indexOf('\'');
+			priorityNumber = Integer.parseInt(listItem.lookup("#priorityNumberLabel").toString().substring(priorityNumberLabelIndex+3,priorityNumberLabelIndex+4));		
+
+			//editNote scene
+			EditNote editNoteScene = new EditNote(Main.arrayList, priorityNumber-1);
+			editNoteScene.createEditNoteGUI();
+			
 			Main.window.setScene(Main.editNote);
 		});
 	    return listItem;

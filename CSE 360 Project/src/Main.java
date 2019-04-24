@@ -30,10 +30,6 @@ public class Main extends Application{
 		FillList listScene = new FillList(arrayList);
 		listScene.createListGUI();
 		
-		//editNote scene
-		EditNote editNoteScene = new EditNote(arrayList);
-		editNoteScene.createEditNoteGUI();
-		
 		//newNote scene
 		NewNote newNoteScene = new NewNote(arrayList);
 		newNoteScene.createNewNoteGUI();

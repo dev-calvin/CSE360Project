@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class ListItemArray implements Serializable{
 		//arraylist of list objects
 		/* list number 1 */

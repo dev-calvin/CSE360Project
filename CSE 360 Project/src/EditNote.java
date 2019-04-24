@@ -3,6 +3,8 @@ import java.util.List;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
@@ -10,9 +12,13 @@ import javafx.geometry.Pos;
 public class EditNote {
 	//arraylist of list objects
 	List<ListItem> listItemArray;
+	int selectedNote;
 	
-	public EditNote (ListItemArray arrayList) {
+	boolean ticked;
+	
+	public EditNote (ListItemArray arrayList, int noteIndex) {
 		listItemArray = arrayList.listItemArray;
+		selectedNote = noteIndex;
 	}
 	
 	public void createEditNoteGUI() {
@@ -23,7 +29,6 @@ public class EditNote {
 		VBox editForm = createEditForm();
 
 		outerLayout.getChildren().addAll(noteDetails,noteActions,editHeader,editForm);
-		
 		
 		Main.editNote = new Scene(outerLayout, 1200, 800);  
 	}
@@ -83,6 +88,17 @@ public class EditNote {
 				
 		inProgressCB = new CheckBox();
 		inProgressCB.setIndeterminate(false);
+		inProgressCB.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if(newValue){
+					ticked = true;
+
+	            }else{
+					ticked = false;
+	            }				
+			}
+	    });
 		
 		inProgress = new Label("In Progress");
 		
@@ -117,8 +133,32 @@ public class EditNote {
 			TextField priorityField, CheckBox inProgressCB, ComboBox<String> statusMonthSelector,
 			ComboBox<String> statusDaySelector) {
 		//validates data and submits edits
+		//TODO validate data
 		
-		Main.window.setScene(Main.list);		
+		
+//		/*replacing idividual parts*/
+//		Main.arrayList.listItemArray.get(selectedNote).setTitle(titleField.getText());
+//		Main.arrayList.listItemArray.get(selectedNote).setDueDate(Integer.parseInt(dueMonthSelector.getValue()), Integer.parseInt(dueDaySelector.getValue()));
+//		Main.arrayList.listItemArray.get(selectedNote).setPriorityNumber(Integer.parseInt(priorityField.getText()));
+//		if(ticked) {
+//			Main.arrayList.listItemArray.get(selectedNote).changeStatus("In Progress", Integer.parseInt(statusMonthSelector.getValue()), Integer.parseInt(statusDaySelector.getValue()));
+//		}
+//		/**/
+		
+		
+		/*replacing whole list item*/
+		Main.arrayList.deleteListItem(selectedNote);
+		Main.arrayList.newListItem(titleField.getText(), Integer.parseInt(dueMonthSelector.getValue()), Integer.parseInt(dueDaySelector.getValue()), Integer.parseInt(priorityField.getText()));
+		
+		if(ticked) {
+			Main.arrayList.listItemArray.get(Integer.parseInt(priorityField.getText())-1).changeStatus("In Progress", Integer.parseInt(statusMonthSelector.getValue()), Integer.parseInt(statusDaySelector.getValue()));
+		}
+		/**/
+		
+		//refreshes list and switches scenes
+		FillList listScene = new FillList(Main.arrayList);
+		listScene.createListGUI();
+		Main.window.setScene(Main.list);
 	}
 
 	public HBox createEditHeader() {
@@ -160,10 +200,10 @@ public class EditNote {
 		noteDetails.setSpacing(300);
 		noteDetails.setStyle("-fx-background-color: #D7D7D7;");
 		
-		priorityNumberLabel = new Label("Priority #");
-		dueDateLabel = new Label("Due Date");
-		titleLabel = new Label("Title");
-		statusLabel = new Label("Status");
+		priorityNumberLabel = new Label("#" + Integer.toString(Main.arrayList.listItemArray.get(selectedNote).getPriorityNumber()));
+		dueDateLabel = new Label(Integer.toString(Main.arrayList.listItemArray.get(selectedNote).getDueMonth()) + "/" + Integer.toString(Main.arrayList.listItemArray.get(selectedNote).getDueDay()));
+		titleLabel = new Label(Main.arrayList.listItemArray.get(selectedNote).getTitle());
+		statusLabel = new Label(Main.arrayList.listItemArray.get(selectedNote).getStatus());
 		
 		noteDetails.getChildren().addAll(priorityNumberLabel,dueDateLabel, titleLabel, statusLabel);
 
