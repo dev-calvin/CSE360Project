@@ -1,3 +1,5 @@
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javafx.scene.Scene;
@@ -186,7 +188,39 @@ public class EditNote {
 		actions.setAlignment(Pos.CENTER);
 		
 		delete = new Button("Delete");
+		delete.setOnAction(e -> {
+			Date today = new Date(); // Fri Jun 17 14:54:28 PDT 2016
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(today); // don't forget this if date is arbitrary e.g. 01-01-2014
+
+			int day = cal.get(Calendar.DAY_OF_MONTH);
+			int month = cal.get(Calendar.MONTH);
+			Main.arrayList.changeStatus("Deleted", month, day, selectedNote+1);
+			
+			//refreshes list and switches scenes
+			FillList listScene = new FillList(Main.arrayList);
+			listScene.createListGUI();
+			Main.window.setScene(Main.list);
+		});
+		
+		
 		complete = new Button("Complete");
+		complete.setOnAction(e -> {
+			Date today = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(today);
+
+			int day = cal.get(Calendar.DAY_OF_MONTH);
+			int month = cal.get(Calendar.MONTH);
+			Main.arrayList.changeStatus("Completed", month, day, selectedNote+1);
+			
+			//refreshes list and switches scenes
+			FillList listScene = new FillList(Main.arrayList);
+			listScene.createListGUI();
+			Main.window.setScene(Main.list);
+		});
+		
+		
 		
 		actions.getChildren().addAll(delete,complete);
 		return actions;
