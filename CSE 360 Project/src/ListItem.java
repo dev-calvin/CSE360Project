@@ -1,5 +1,6 @@
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class ListItem implements Serializable{
 	enum Status {
 		NOTSTARTED("Not Started"),
