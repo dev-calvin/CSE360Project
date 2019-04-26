@@ -33,7 +33,7 @@ public class ListItemArray implements Serializable{
 		public void newListItem(String title, int dueMonth, int dueDay, int priorityNumber){
 			sortPriorityNumber(listItemArray,1);
 			
-			if(priorityNumber == listItemArray.size() && listItemArray.size() != 1) {
+			if(priorityNumber-1 == listItemArray.size() && listItemArray.size() != 1) {
 				listItemArray.add(new ListItem(title, dueMonth, dueDay, priorityNumber));
 			} else {
 				listItemArray.add(priorityNumber - 1, new ListItem(title, dueMonth, dueDay, priorityNumber));

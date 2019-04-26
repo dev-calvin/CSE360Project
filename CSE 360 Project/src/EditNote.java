@@ -194,8 +194,7 @@ public class EditNote {
 			/*replacing whole list item*/
 			Main.arrayList.deleteListItem(selectedNote + 1);
 			Main.arrayList.newListItem(titleField.getText(), Integer.parseInt(dueMonthSelector.getValue()), Integer.parseInt(dueDaySelector.getValue()), Integer.parseInt(priorityField.getText()));
-			
-			System.out.println(ticked);
+						
 			if(ticked) {
 				Main.arrayList.listItemArray.get(Integer.parseInt(priorityField.getText())-1).changeStatus("In Progress", Integer.parseInt(statusMonthSelector.getValue()), Integer.parseInt(statusDaySelector.getValue()));
 			}
