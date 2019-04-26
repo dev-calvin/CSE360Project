@@ -4,6 +4,9 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.scene.control.Alert;
+
+@SuppressWarnings("restriction")
 public class ListReport {
 	//arraylist of list objects
 	List<ListItem> listItemArray;
@@ -61,6 +64,12 @@ public class ListReport {
 	    });
 	    
 	    printWriter.close();
+	    
+		Alert successful = new Alert(Alert.AlertType.INFORMATION);
+		successful.setTitle("Successful");
+		successful.setHeaderText("Report.txt has been created!");
+		successful.setContentText("Click \"OK\" to dismiss this message.");
+		successful.showAndWait();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

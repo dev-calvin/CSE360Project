@@ -149,9 +149,10 @@ public class EditNote {
 		
 		
 		/*replacing whole list item*/
-		Main.arrayList.deleteListItem(selectedNote);
+		Main.arrayList.deleteListItem(selectedNote + 1);
 		Main.arrayList.newListItem(titleField.getText(), Integer.parseInt(dueMonthSelector.getValue()), Integer.parseInt(dueDaySelector.getValue()), Integer.parseInt(priorityField.getText()));
 		
+		System.out.println(ticked);
 		if(ticked) {
 			Main.arrayList.listItemArray.get(Integer.parseInt(priorityField.getText())-1).changeStatus("In Progress", Integer.parseInt(statusMonthSelector.getValue()), Integer.parseInt(statusDaySelector.getValue()));
 		}
@@ -194,7 +195,8 @@ public class EditNote {
 			cal.setTime(today); // don't forget this if date is arbitrary e.g. 01-01-2014
 
 			int day = cal.get(Calendar.DAY_OF_MONTH);
-			int month = cal.get(Calendar.MONTH);
+			int month = cal.get(Calendar.MONTH) +1;
+			
 			Main.arrayList.changeStatus("Deleted", month, day, selectedNote+1);
 			
 			//refreshes list and switches scenes
@@ -211,7 +213,8 @@ public class EditNote {
 			cal.setTime(today);
 
 			int day = cal.get(Calendar.DAY_OF_MONTH);
-			int month = cal.get(Calendar.MONTH);
+			int month = cal.get(Calendar.MONTH)+1;
+			
 			Main.arrayList.changeStatus("Completed", month, day, selectedNote+1);
 			
 			//refreshes list and switches scenes
