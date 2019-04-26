@@ -41,7 +41,7 @@ public class EditNote {
 		Label title, dueDay, dueMonth, priority, inProgress, statusMonth, statusDay;
 		TextField titleField, priorityField;
 		ComboBox<String> dueDaySelector, dueMonthSelector, statusDaySelector, statusMonthSelector;
-		Button save;
+		Button save, cancel;
 		
 		VBox form = new VBox();
 		form.setPadding(new Insets(10));
@@ -70,14 +70,16 @@ public class EditNote {
 		statusBox.setAlignment(Pos.CENTER);
 				
 		dueDaySelector = new ComboBox<String>();
-		dueDaySelector.getItems().addAll("1","2","3","4","5", "6", "7", "8", "9", "10", "11", "12", "13",
+		dueDaySelector.getItems().addAll(" ", "1","2","3","4","5", "6", "7", "8", "9", "10", "11", "12", "13",
 	    		"14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
 	    		"28", "29", "30", "31");
+		dueDaySelector.getSelectionModel().selectFirst();
 		
 		dueDay = new Label("Due Day");
 		
 		dueMonthSelector = new ComboBox<String>();
-		dueMonthSelector.getItems().addAll("1","2","3","4","5", "6", "7", "8", "9", "10", "11", "12");
+		dueMonthSelector.getItems().addAll(" ", "1","2","3","4","5", "6", "7", "8", "9", "10", "11", "12");
+		dueMonthSelector.getSelectionModel().selectFirst();
 		
 		HBox priorityBox = new HBox();
 		priorityBox.setPadding(new Insets(15, 12, 15, 12));
@@ -125,9 +127,14 @@ public class EditNote {
 			validateForm(titleField, dueMonthSelector, dueDaySelector, priorityField, inProgressCB, statusMonthSelector, statusDaySelector);			
 		});
 		
+		cancel = new Button("Cancel");
+		cancel.setOnAction(e -> {
+			Main.window.setScene(Main.list);
+		});
+		
 		statusBox.getChildren().addAll(inProgress, inProgressCB, statusMonth, statusMonthSelector, statusDay, statusDaySelector);
 		due.getChildren().addAll(dueMonth, dueMonthSelector, dueDay, dueDaySelector);
-		form.getChildren().addAll(titleBox, due, priorityBox, statusBox, bottom, save);
+		form.getChildren().addAll(titleBox, due, priorityBox, statusBox, bottom, save, cancel);
 		return form;
 	}
 
@@ -146,22 +153,83 @@ public class EditNote {
 //			Main.arrayList.listItemArray.get(selectedNote).changeStatus("In Progress", Integer.parseInt(statusMonthSelector.getValue()), Integer.parseInt(statusDaySelector.getValue()));
 //		}
 //		/**/
+		String priority = checkPriorityField(priorityField);
 		
-		
-		/*replacing whole list item*/
-		Main.arrayList.deleteListItem(selectedNote + 1);
-		Main.arrayList.newListItem(titleField.getText(), Integer.parseInt(dueMonthSelector.getValue()), Integer.parseInt(dueDaySelector.getValue()), Integer.parseInt(priorityField.getText()));
-		
-		System.out.println(ticked);
-		if(ticked) {
-			Main.arrayList.listItemArray.get(Integer.parseInt(priorityField.getText())-1).changeStatus("In Progress", Integer.parseInt(statusMonthSelector.getValue()), Integer.parseInt(statusDaySelector.getValue()));
+		if (titleField.getText().isEmpty() || dueMonthSelector.getValue() == " " || dueDaySelector.getValue() == " "
+				|| priority != "correct") {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			String alerts = new String();
+			
+			if (titleField.getText().isEmpty()
+					|| (titleField.getText().length() == 1 && titleField.getText().equals(" "))) {
+				alerts = "Needs a title. \n";
+			}
+			
+			if (dueMonthSelector.getValue() == " ") {
+				alerts = alerts + "Needs a due month.\n";
+			}
+			
+			if (dueDaySelector.getValue() == " ") {
+				alerts = alerts + "Needs a due day.\n";
+			} else if (dueDaySelector.getValue() != " " && Integer.parseInt(dueMonthSelector.getValue()) == 2
+					&& dateValidation(Integer.parseInt(dueMonthSelector.getValue()),
+							Integer.parseInt(dueDaySelector.getValue()))) {
+				alerts = alerts + "February does not have more than 29 days \n";
+			} else if (dueDaySelector.getValue() != " " && Integer.parseInt(dueMonthSelector.getValue()) > 2
+					&& dateValidation(Integer.parseInt(dueMonthSelector.getValue()),
+							Integer.parseInt(dueDaySelector.getValue()))) {
+				alerts = alerts + "The date " + dueMonthSelector.getValue() + "/" + dueDaySelector.getValue() + " does not exist. \n";
+			}
+			
+			if(priority != "correct") {
+				alerts += priority;
+			}
+			
+			alert.setTitle("Edit Note Error");
+			alert.setHeaderText("All fields must be filled in.\nPlease correct the following:");
+			alert.setContentText(alerts);
+			alert.showAndWait();			
+			
+		} else {
+			/*replacing whole list item*/
+			Main.arrayList.deleteListItem(selectedNote + 1);
+			Main.arrayList.newListItem(titleField.getText(), Integer.parseInt(dueMonthSelector.getValue()), Integer.parseInt(dueDaySelector.getValue()), Integer.parseInt(priorityField.getText()));
+			
+			System.out.println(ticked);
+			if(ticked) {
+				Main.arrayList.listItemArray.get(Integer.parseInt(priorityField.getText())-1).changeStatus("In Progress", Integer.parseInt(statusMonthSelector.getValue()), Integer.parseInt(statusDaySelector.getValue()));
+			}
+			/**/
+			
+			//refreshes list and switches scenes
+			FillList listScene = new FillList(Main.arrayList);
+			listScene.createListGUI();
+			Main.window.setScene(Main.list);
 		}
-		/**/
+	}
+	
+	public boolean dateValidation(int dueMonth, int dueDay) {
+		boolean flag = false;
+
+		if (dueMonth == 2 && dueDay > 29 || dueMonth == 4 && dueDay > 30 || dueMonth == 6 && dueDay > 30
+				|| dueMonth == 9 && dueDay > 30 || dueMonth == 11 && dueDay > 30) {
+			flag = true;
+		}
+		return flag;
+	}
+	
+	private String checkPriorityField(TextField priorityField) {
+		if (priorityField.getText().isEmpty()) {
+			return "Needs a priority number";
+		} else if (!priorityField.getText().matches("[0-9]+")) {
+			return "Priority can only contain numbers!";
+		} else if (Integer.parseInt(priorityField.getText()) > (Main.arrayList.listItemArray.size() + 1)) {
+			return "Priority should not be more than than " + (Main.arrayList.listItemArray.size() + 1) + ".";
+		} else if (Integer.parseInt(priorityField.getText()) < 1) {
+			return "Priority should not be less than 1";
+		}
 		
-		//refreshes list and switches scenes
-		FillList listScene = new FillList(Main.arrayList);
-		listScene.createListGUI();
-		Main.window.setScene(Main.list);
+		return "correct";
 	}
 
 	public HBox createEditHeader() {
