@@ -114,18 +114,10 @@ public class NewNote {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		Alert successful = new Alert(Alert.AlertType.INFORMATION);
 		String alerts = new String();
-		
-		System.out.println("1 " + titleField.getText().isEmpty());
-		System.out.println("2 " + dueMonthSelector.getValue() == " ");
-		System.out.println("3 " + dueDaySelector.getValue() == " ");
-		System.out.println("4 " + !priorityField.getText().isEmpty());
-		System.out.println("5 " +!priorityField.getText().matches("[0-9]+"));
-		System.out.println("6 " + dateValidation(Integer.parseInt(dueMonthSelector.getValue()), Integer.parseInt(dueDaySelector.getValue())));
 
-		
+		String priority = checkPriorityField(priorityField);
 		if (titleField.getText().isEmpty() || dueMonthSelector.getValue() == " " || dueDaySelector.getValue() == " "
-				|| priorityField.getText().isEmpty() || !priorityField.getText().matches("[0-9]+") || dateValidation(
-						Integer.parseInt(dueMonthSelector.getValue()), Integer.parseInt(dueDaySelector.getValue()))) {
+				|| priority != "correct") {
 			
 			if (titleField.getText().isEmpty()
 					|| (titleField.getText().length() == 1 && titleField.getText().equals(" "))) {
@@ -148,16 +140,10 @@ public class NewNote {
 				alerts = alerts + "The date " + dueMonthSelector.getValue() + "/" + dueDaySelector.getValue() + " does not exist. \n";
 			}
 			
-			/*this code is never reached*/
-			if (priorityField.getText().isEmpty()) {
-				alerts = alerts + "Needs a priority number";
-			} else if (!priorityField.getText().matches("[0-9]+")) {
-				alerts = alerts + "Priority can only contain numbers!";
-			} else if (Integer.parseInt(priorityField.getText()) > (Main.arrayList.listItemArray.size() + 1)) {
-				alerts = alerts + "Priority should not be more than than " + (Main.arrayList.listItemArray.size() + 1) + ".";
+			if(priority != "correct") {
+				alerts += priority;
 			}
-			/**/
-
+			
 			alert.setTitle("Input Validation");
 			alert.setHeaderText("Please correct the following:");
 			alert.setContentText(alerts);
@@ -180,6 +166,20 @@ public class NewNote {
 			successful.setContentText("Click \"OK\" to dismiss this message.");
 			successful.showAndWait();
 		}
+	}
+
+	private String checkPriorityField(TextField priorityField) {
+		if (priorityField.getText().isEmpty()) {
+			return "Needs a priority number";
+		} else if (!priorityField.getText().matches("[0-9]+")) {
+			return "Priority can only contain numbers!";
+		} else if (Integer.parseInt(priorityField.getText()) > (Main.arrayList.listItemArray.size() + 1)) {
+			return "Priority should not be more than than " + (Main.arrayList.listItemArray.size() + 1) + ".";
+		} else if (Integer.parseInt(priorityField.getText()) < 1) {
+			return "Priority should not be less than 1";
+		}
+		
+		return "correct";
 	}
 
 	public boolean dateValidation(int dueMonth, int dueDay) {
