@@ -1,13 +1,7 @@
 List Report
 
 List Items Not Started:
-- #2 12/31 Go for a run
-- #3 2/5 zipline set up
-- #4 1/1 tester
 List Items In Progress:
-- #1 2/11 Take out trash, Started on: 1/25
 List Items That Were Deleted:
-- #6 1/1 tester3, Deleted on: 3/24
+- #1 4/8 hi Calvin, Deleted on: 4/25
 List Items That Were Completed:
-- #5 1/1 tester2, Completed on: 3/24
-- #2 7/28 Eat an apple, Completed on: 1/7
