@@ -123,7 +123,7 @@ public class FillList{
 	}
 	
 	//buttons for list
-	Button addNote, report, load, save, sort;
+	Button addNote, report, load, save, sort,clear;
 	//regions for spacing header
 	Region regionLeft, regionRight;
 	//header text
@@ -151,6 +151,18 @@ public class FillList{
 			ListReport report = new ListReport(Main.arrayList);
 			report.createReport();
 			
+		});
+		
+		//clear button
+		clear = new Button();
+		clear.setText("Clear");
+		clear.setPrefSize(100, 20);
+		clear.setOnAction(e -> {
+			Main.arrayList = new ListItemArray();
+			//refreshes list and switches scenes
+			FillList listScene = new FillList(Main.arrayList);
+			listScene.createListGUI();
+			Main.window.setScene(Main.list);
 		});
 		
 		regionLeft = new Region();
@@ -189,7 +201,7 @@ public class FillList{
 		sort.setPrefSize(100, 20);
 		sort.setOnAction(e -> new SortList());
 		
-		listTop.getChildren().addAll(addNote,report, regionLeft, header, regionRight, load, save, sort);
+		listTop.getChildren().addAll(addNote,report,clear, regionLeft, header, regionRight, load, save, sort);
 
 	    return listTop;
 	}
