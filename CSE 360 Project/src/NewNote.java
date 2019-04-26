@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -116,8 +117,10 @@ public class NewNote {
 		String alerts = new String();
 
 		String priority = checkPriorityField(priorityField);
+		Boolean unique = isUnique(titleField.getText());
+		
 		if (titleField.getText().isEmpty() || dueMonthSelector.getValue() == " " || dueDaySelector.getValue() == " "
-				|| priority != "correct") {
+				|| priority != "correct" || unique == false) {
 			
 			if (titleField.getText().isEmpty()
 					|| (titleField.getText().length() == 1 && titleField.getText().equals(" "))) {
@@ -142,6 +145,10 @@ public class NewNote {
 			
 			if(priority != "correct") {
 				alerts += priority;
+			}
+			
+			if(unique != true) {
+				alerts += "Title must be unique.\n";
 			}
 			
 			alert.setTitle("Input Validation");
@@ -190,5 +197,15 @@ public class NewNote {
 			flag = true;
 		}
 		return flag;
+	}
+	
+	public boolean isUnique(String title) {
+		 List<ListItem> titles = Main.arrayList.listItemArray.stream()
+				 .filter(listItem -> listItem.getTitle().equals(title)).collect(Collectors.toList());
+		 
+		 if(titles.size() > 0) {
+			 return false;
+		 }
+		return true;
 	}
 }

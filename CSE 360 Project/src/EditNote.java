@@ -1,6 +1,7 @@
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -154,7 +155,8 @@ public class EditNote {
 //		}
 //		/**/
 		String priority = checkPriorityField(priorityField);
-		
+		Boolean unique = isUnique(titleField.getText());
+
 		if (titleField.getText().isEmpty() || dueMonthSelector.getValue() == " " || dueDaySelector.getValue() == " "
 				|| priority != "correct") {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -183,6 +185,10 @@ public class EditNote {
 			
 			if(priority != "correct") {
 				alerts += priority;
+			}
+			
+			if(unique != true) {
+				alerts += "Title must be unique.\n";
 			}
 			
 			alert.setTitle("Edit Note Error");
@@ -229,6 +235,16 @@ public class EditNote {
 		}
 		
 		return "correct";
+	}
+	
+	public boolean isUnique(String title) {
+		 List<ListItem> titles = Main.arrayList.listItemArray.stream()
+				 .filter(listItem -> listItem.getTitle().equals(title)).collect(Collectors.toList());
+		 
+		 if(titles.size() > 0) {
+			 return false;
+		 }
+		return true;
 	}
 
 	public HBox createEditHeader() {
